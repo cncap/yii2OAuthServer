@@ -1,5 +1,5 @@
 {
-    "name": "cncap/yii2OAuthServer",
+    "name": "cncap/yii2oauth2server",
     "description": "OAuth2 Server for PHP",
     "keywords": ["yii", "extension", "module", "oauth", "oauth2"],
     "homepage": "https://github.com/cncap/yii2OAuthServer",
