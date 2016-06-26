@@ -31,7 +31,16 @@ class DefaultController extends \yii\rest\Controller
         $server = $this->module->getServer();
         $request = $this->module->getRequest();
         $response = $server->handleRevokeRequest($request);
-
+        return $response->getParameters();
+    }
+    /**
+     * @return mixed
+     */
+    public function actionAuthorize()
+    {
+        $request = new Request(Yii::$app->request->post());
+        $response = new Response();
+        $response = $this->module->getServer()->handleAuthorizeRequest($request, $response, true);
         return $response->getParameters();
     }
 }
