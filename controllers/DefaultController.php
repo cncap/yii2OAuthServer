@@ -1,8 +1,8 @@
 <?php
-namespace filsh\yii2\oauth2server\controllers;
+namespace cncap\yii2\oauth2server\controllers;
 use Yii;
 use yii\helpers\ArrayHelper;
-use filsh\yii2\oauth2server\filters\ErrorToExceptionFilter;
+use cncap\yii2\oauth2server\filters\ErrorToExceptionFilter;
 class DefaultController extends \yii\rest\Controller
 {
     /**
