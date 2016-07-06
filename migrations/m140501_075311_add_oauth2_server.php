@@ -46,61 +46,63 @@ class m140501_075311_add_oauth2_server extends \yii\db\Migration
                 'grant_types' => Schema::TYPE_STRING . '(100) NOT NULL',
                 'scope' => Schema::TYPE_STRING . '(2000) DEFAULT NULL',
                 'user_id' => Schema::TYPE_INTEGER . ' DEFAULT NULL',
-                $this->primaryKey('client_id'),
+                $this->primaryKey("client_id"),
             ], $tableOptions);
 
             $this->createTable('{{%oauth_access_tokens}}', [
+                'id' => Schema::TYPE_UBIGPK ,
                 'access_token' => Schema::TYPE_STRING . '(40) NOT NULL',
                 'client_id' => Schema::TYPE_STRING . '(32) NOT NULL',
                 'user_id' => Schema::TYPE_INTEGER . ' DEFAULT NULL',
                 'expires' => Schema::TYPE_TIMESTAMP . " NOT NULL DEFAULT $now $on_update_now",
                 'scope' => Schema::TYPE_STRING . '(2000) DEFAULT NULL',
-                $this->primaryKey('access_token'),
                 $this->foreignKey('client_id','{{%oauth_clients}}','client_id','CASCADE','CASCADE'),
             ], $tableOptions);
 
             $this->createTable('{{%oauth_refresh_tokens}}', [
+                'id' => Schema::TYPE_UBIGPK ,
                 'refresh_token' => Schema::TYPE_STRING . '(40) NOT NULL',
                 'client_id' => Schema::TYPE_STRING . '(32) NOT NULL',
                 'user_id' => Schema::TYPE_INTEGER . ' DEFAULT NULL',
                 'expires' => Schema::TYPE_TIMESTAMP . " NOT NULL DEFAULT $now $on_update_now",
                 'scope' => Schema::TYPE_STRING . '(2000) DEFAULT NULL',
-                $this->primaryKey('refresh_token'),
                 $this->foreignKey('client_id','{{%oauth_clients}}','client_id','CASCADE','CASCADE'),
             ], $tableOptions);
 
             $this->createTable('{{%oauth_authorization_codes}}', [
+                'id' => Schema::TYPE_UBIGPK ,
                 'authorization_code' => Schema::TYPE_STRING . '(40) NOT NULL',
                 'client_id' => Schema::TYPE_STRING . '(32) NOT NULL',
                 'user_id' => Schema::TYPE_INTEGER . ' DEFAULT NULL',
                 'redirect_uri' => Schema::TYPE_STRING . '(1000) NOT NULL',
                 'expires' => Schema::TYPE_TIMESTAMP . " NOT NULL DEFAULT $now $on_update_now",
                 'scope' => Schema::TYPE_STRING . '(2000) DEFAULT NULL',
-                $this->primaryKey('authorization_code'),
                 $this->foreignKey('client_id','{{%oauth_clients}}','client_id','CASCADE','CASCADE'),
             ], $tableOptions);
 
             $this->createTable('{{%oauth_scopes}}', [
+                'id' => Schema::TYPE_UBIGPK ,
                 'scope' => Schema::TYPE_STRING . '(2000) NOT NULL',
                 'is_default' => Schema::TYPE_BOOLEAN . ' NOT NULL',
             ], $tableOptions);
 
             $this->createTable('{{%oauth_jwt}}', [
+                'id' => Schema::TYPE_UBIGPK ,
                 'client_id' => Schema::TYPE_STRING . '(32) NOT NULL',
                 'subject' => Schema::TYPE_STRING . '(80) DEFAULT NULL',
                 'public_key' => Schema::TYPE_STRING . '(2000) DEFAULT NULL',
-                $this->primaryKey('client_id'),
             ], $tableOptions);
 
             $this->createTable('{{%oauth_users}}', [
+                'id' => Schema::TYPE_UBIGPK ,
                 'username' => Schema::TYPE_STRING . '(255) NOT NULL',
                 'password' => Schema::TYPE_STRING . '(2000) DEFAULT NULL',
                 'first_name' => Schema::TYPE_STRING . '(255) DEFAULT NULL',
                 'last_name' => Schema::TYPE_STRING . '(255) DEFAULT NULL',
-                $this->primaryKey('username'),
             ], $tableOptions);
 
             $this->createTable('{{%oauth_public_keys}}', [
+                'id' => Schema::TYPE_UBIGPK ,
                 'client_id' => Schema::TYPE_STRING . '(255) NOT NULL',
                 'public_key' => Schema::TYPE_STRING . '(2000) DEFAULT NULL',
                 'private_key' => Schema::TYPE_STRING . '(2000) DEFAULT NULL',

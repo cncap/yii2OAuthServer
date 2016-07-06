@@ -19,10 +19,17 @@ class DefaultController extends \yii\rest\Controller
 
     public function actionToken()
     {
-        $server = $this->module->getServer();
-        $request = $this->module->getRequest();
-        $response = $server->handleTokenRequest($request);
+        $response = $this->module->getServer()->handleTokenRequest();
+        return $response->getParameters();
+    }
+    /**
+     * @return mixed
+     */
+    public function actionAuthorize()
+    {
+        $request = new Request(Yii::$app->request->post());
 
+        $response = $this->module->getServer()->handleAuthorizeRequest($request, $response = new Response(), true);
         return $response->getParameters();
     }
 
@@ -33,14 +40,5 @@ class DefaultController extends \yii\rest\Controller
         $response = $server->handleRevokeRequest($request);
         return $response->getParameters();
     }
-    /**
-     * @return mixed
-     */
-    public function actionAuthorize()
-    {
-        $request = new Request(Yii::$app->request->post());
-        $response = new Response();
-        $response = $this->module->getServer()->handleAuthorizeRequest($request, $response, true);
-        return $response->getParameters();
-    }
+
 }
